@@ -6,8 +6,8 @@ import {
 
 export interface IUserRepository {
   find(): Promise<UserDto[]>
-  findOne(id: number): Promise<UserDto>
-  create(paranms: CreateUserDto): Promise<UserDto>
-  update(id: number, params: Partial<UpdateUserDto>): Promise<UserDto>
-  delete(id: number): Promise<UserDto>
+  findOne(id: string): Promise<UserDto>
+  create(params: CreateUserDto): Promise<UserDto>
+  update(id: string, params: Partial<UpdateUserDto>): Promise<UserDto>
+  delete(id: string): Promise<UserDto>
 }

@@ -1,12 +1,21 @@
+import { Expose, Exclude, Transform, Type } from 'class-transformer'
 import { User } from '../../../../domain/user'
 
+@Exclude()
 export class UserDto implements Omit<User, 'password' | 'createdAt'> {
-  constructor(
-    public id: number,
-    public firstName: string,
-    public lastName: string,
-    public email: string,
-    public password: string,
-    public createdAt: string,
-  ) {}
+  @Expose()
+  readonly id: string
+
+  @Expose()
+  readonly firstName: string
+
+  @Expose()
+  readonly lastName: string
+
+  @Expose()
+  readonly email: string
+
+  @Expose()
+  @Transform(({ value }) => value?.toISOString())
+  readonly createdAt: Date
 }

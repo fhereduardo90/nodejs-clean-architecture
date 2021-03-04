@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "tsc --noEmit && eslint src/**/*.ts --color --max-warnings=0",
-    "format": "prettier --write src/**/*.ts"
+    "format": "prettier --write src/**/*.ts",
+    "start:restapi": "nodemon src/infrastructure/express-server/server.ts"
   },
   "repository": {
     "type": "git",
@@ -19,14 +20,27 @@
   },
   "homepage": "https://github.com/fhereduardo90/nodejs-clean-architecture#readme",
   "dependencies": {
+    "body-parser": "^1.19.0",
+    "class-transformer": "^0.4.0",
+    "class-validator": "^0.13.1",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
+    "express-async-handler": "^1.1.4",
+    "http-errors": "^1.8.0",
+    "morgan": "^1.10.0",
     "reflect-metadata": "^0.1.13",
-    "tsyringe": "^4.4.0"
+    "tsyringe": "^4.4.0",
+    "uuid": "^8.3.2",
+    "winston": "^3.3.3"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.10",
     "@types/express": "^4.17.11",
+    "@types/http-errors": "^1.8.0",
     "@types/jest": "^26.0.20",
+    "@types/morgan": "^1.9.2",
     "@types/node": "^14.14.31",
+    "@types/uuid": "^8.3.0",
     "@typescript-eslint/eslint-plugin": "^4.16.1",
     "@typescript-eslint/parser": "^4.16.1",
     "eslint": "^7.21.0",
@@ -35,6 +49,7 @@
     "eslint-plugin-jest": "^24.1.5",
     "eslint-plugin-prettier": "^3.3.1",
     "jest": "^26.6.3",
+    "nodemon": "^2.0.7",
     "prettier": "^2.2.1",
     "ts-jest": "^26.5.2",
     "ts-node": "^9.1.1",

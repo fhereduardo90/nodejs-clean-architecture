@@ -1,11 +1,11 @@
 import { IUserRepository } from '../../contracts/repositories/user.repository'
 import { UserDto } from './dtos'
 
-export interface IFindUserCase {
+export interface IFindUsersCase {
   execute(): Promise<UserDto[]>
 }
 
-export class FindUserCase implements IFindUserCase {
+export class FindUsersCase implements IFindUsersCase {
   constructor(private readonly userRepositoiry: IUserRepository) {}
 
   execute(): Promise<UserDto[]> {
