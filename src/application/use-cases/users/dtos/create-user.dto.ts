@@ -1,4 +1,4 @@
-import { User } from 'src/domain/user'
+import { User } from '../../../../domain/user'
 
 export class CreateUserDto implements Omit<User, 'id' | 'createdAt'> {
   constructor(
