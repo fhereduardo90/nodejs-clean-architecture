@@ -6,10 +6,10 @@ export interface ICreateUserCase {
 }
 
 export class CreateUserCase implements ICreateUserCase {
-  constructor(private readonly userRepositoiry: IUserRepository) {}
+  constructor(private readonly userRepository: IUserRepository) {}
 
   async execute(params: CreateUserDto): Promise<UserDto> {
     await params.isValid()
-    return this.userRepositoiry.create(params)
+    return this.userRepository.create(params)
   }
 }

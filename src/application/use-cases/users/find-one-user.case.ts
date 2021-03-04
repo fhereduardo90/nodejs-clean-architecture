@@ -6,9 +6,9 @@ export interface IFindOneUserCase {
 }
 
 export class FindOneUserCase implements IFindOneUserCase {
-  constructor(private readonly userRepositoiry: IUserRepository) {}
+  constructor(private readonly userRepository: IUserRepository) {}
 
   execute(id: string): Promise<UserDto> {
-    return this.userRepositoiry.findOne(id)
+    return this.userRepository.findOne(id)
   }
 }

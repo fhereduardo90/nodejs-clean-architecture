@@ -6,9 +6,9 @@ export interface IUpdateUserCase {
 }
 
 export class UpdateUserCase implements IUpdateUserCase {
-  constructor(private readonly userRepositoiry: IUserRepository) {}
+  constructor(private readonly userRepository: IUserRepository) {}
 
   execute(id: string, params: UpdateUserDto): Promise<UserDto> {
-    return this.userRepositoiry.update(id, params)
+    return this.userRepository.update(id, params)
   }
 }

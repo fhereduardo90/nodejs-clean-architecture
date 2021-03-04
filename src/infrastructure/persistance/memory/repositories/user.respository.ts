@@ -11,6 +11,8 @@ import { UserEntity } from '../entities/user.entity'
 const userDB: UserEntity[] = []
 
 export class UserRespository implements IUserRepository {
+  constructor() {}
+
   create(params: CreateUserDto): Promise<UserDto> {
     const user = new UserEntity(
       uuidv4(),

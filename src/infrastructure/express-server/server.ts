@@ -36,7 +36,7 @@ function errorHandler(
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   next: NextFunction,
 ): void {
-  if (process.env.NODE_ENV === 'development') {
+  if (process.env.NODE_ENV !== 'development') {
     logger.error(err.message)
     logger.error(err.stack || '')
   }
