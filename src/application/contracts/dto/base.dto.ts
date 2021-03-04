@@ -19,7 +19,7 @@ export class BaseDto {
   }
 
   private getConstraints(error: ValidationError): string[] {
-    if (error.children.length) {
+    if (error?.children?.length) {
       return this.getConstraints(error.children[0])
     }
 
