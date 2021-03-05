@@ -1,5 +1,4 @@
 import { v4 as uuidv4 } from 'uuid'
-import { plainToClass } from 'class-transformer'
 import { IUserRepository } from '../../../../application/contracts/repositories'
 import {
   CreateUserDto,
@@ -22,11 +21,11 @@ export class UserRespository implements IUserRepository {
     )
     userDB.push(user)
 
-    return Promise.resolve(plainToClass(UserDto, user))
+    return Promise.resolve(user)
   }
 
   find(): Promise<UserDto[]> {
-    return Promise.resolve(plainToClass(UserDto, userDB))
+    return Promise.resolve(userDB)
   }
 
   findOne(id: string): Promise<UserDto> {
@@ -34,7 +33,7 @@ export class UserRespository implements IUserRepository {
 
     if (!user) throw new Error(`Couldn't find User with id = '${id}'`)
 
-    return Promise.resolve(plainToClass(UserDto, user))
+    return Promise.resolve(user)
   }
 
   update(id: string, params: Partial<UpdateUserDto>): Promise<UserDto> {
@@ -46,7 +45,7 @@ export class UserRespository implements IUserRepository {
 
     userDB[index] = { ...userDB[index], ...params }
 
-    return Promise.resolve(plainToClass(UserDto, userDB[index]))
+    return Promise.resolve(userDB[index])
   }
 
   delete(id: string): Promise<UserDto> {
@@ -58,6 +57,6 @@ export class UserRespository implements IUserRepository {
 
     const user = userDB.splice(index, 1)[0]
 
-    return Promise.resolve(plainToClass(UserDto, user))
+    return Promise.resolve(user)
   }
 }
