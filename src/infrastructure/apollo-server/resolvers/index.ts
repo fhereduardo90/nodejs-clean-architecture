@@ -3,6 +3,7 @@ import { DependencyContainer } from 'tsyringe'
 import { GraphQLScalarType } from 'graphql'
 import {
   ICreateUserCase,
+  IFindOneUserCase,
   IFindUsersCase,
 } from '../../../application/use-cases/users'
 import {
@@ -36,6 +37,18 @@ export const resolvers = {
         TYPES.FIND_USERS_CASE,
       )
       const result = await useCase.execute()
+
+      return result
+    },
+    async user(
+      _: unknown,
+      args: { id: string },
+      { IOCContainer }: ContextType,
+    ): Promise<UserDto> {
+      const useCase = IOCContainer.resolve<IFindOneUserCase>(
+        TYPES.FIND_ONE_USER_CASE,
+      )
+      const result = await useCase.execute(args.id)
 
       return result
     },

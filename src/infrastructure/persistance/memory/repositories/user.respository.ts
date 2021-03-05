@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from 'uuid'
+import createError from 'http-errors'
 import { IUserRepository } from '../../../../application/contracts/repositories'
 import {
   CreateUserDto,
@@ -34,7 +35,8 @@ export class UserRespository implements IUserRepository {
   findOne(id: string): Promise<UserDto> {
     const user = userDB.find((u) => u.id === id)
 
-    if (!user) throw new Error(`Couldn't find User with id = '${id}'`)
+    if (!user)
+      throw new createError.NotFound(`Couldn't find User with id = '${id}'`)
 
     return Promise.resolve(user)
   }
@@ -43,7 +45,7 @@ export class UserRespository implements IUserRepository {
     const index = userDB.findIndex((u) => u.id === id)
 
     if (index === -1) {
-      throw new Error(`Couldn't find User with id = '${id}'`)
+      throw new createError.NotFound(`Couldn't find User with id = '${id}'`)
     }
 
     userDB[index] = { ...userDB[index], ...params }
@@ -55,7 +57,7 @@ export class UserRespository implements IUserRepository {
     const index = userDB.findIndex((u) => u.id === id)
 
     if (index === -1) {
-      throw new Error(`Couldn't find User with id = '${id}'`)
+      throw new createError.NotFound(`Couldn't find User with id = '${id}'`)
     }
 
     const user = userDB.splice(index, 1)[0]
