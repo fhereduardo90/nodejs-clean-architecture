@@ -1,4 +1,8 @@
-import { container, instanceCachingFactory } from 'tsyringe'
+import {
+  container,
+  DependencyContainer,
+  instanceCachingFactory,
+} from 'tsyringe'
 
 // REPOSITORIES
 import { IUserRepository } from '../../application/contracts/repositories'
@@ -18,7 +22,7 @@ import {
 } from '../../application/use-cases/users'
 import { TYPES } from './types'
 
-export function IOCContainerInit(): void {
+export function IOCContainerInit(): DependencyContainer {
   // REPOSITORIES
   container.registerSingleton<IUserRepository>(
     TYPES.USER_REPOSITORY,
@@ -56,4 +60,6 @@ export function IOCContainerInit(): void {
         new DeleteUserCase(d.resolve<IUserRepository>(TYPES.USER_REPOSITORY)),
     ),
   })
+
+  return container
 }
