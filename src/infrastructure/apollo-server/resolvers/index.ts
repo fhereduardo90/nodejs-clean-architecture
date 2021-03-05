@@ -44,7 +44,7 @@ export const resolvers = {
       _: unknown,
       args: { id: string },
       { IOCContainer }: ContextType,
-    ): Promise<UserDto> {
+    ): Promise<UserDto | null> {
       const useCase = IOCContainer.resolve<IFindOneUserCase>(
         TYPES.FIND_ONE_USER_CASE,
       )

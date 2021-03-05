@@ -52,7 +52,8 @@ app.get('/api/v1/status', (req: Request, res: Response) => {
 app.use('/', apiRouter(app))
 app.use(errorHandler)
 
-app.listen(PORT, () => {
-  IOCContainerInit()
+app.listen(PORT, async () => {
+  const container = IOCContainerInit()
+
   logger.info(`Server listening on port %d, env: %s`, PORT, ENVIROMENT)
 })
