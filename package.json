@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "tsc --noEmit && eslint src/**/*.ts --color --max-warnings=0",
     "format": "prettier --write src/**/*.ts",
-    "start:restapi": "nodemon src/infrastructure/express-server/server.ts"
+    "start:graphql": "nodemon ./src/infrastructure/apollo-server/server.ts",
+    "start:restapi": "nodemon ./src/infrastructure/express-server/server.ts"
   },
   "repository": {
     "type": "git",
@@ -20,12 +21,13 @@
   },
   "homepage": "https://github.com/fhereduardo90/nodejs-clean-architecture#readme",
   "dependencies": {
-    "body-parser": "^1.19.0",
+    "apollo-server-express": "^2.21.0",
     "class-transformer": "^0.4.0",
     "class-validator": "^0.13.1",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-async-handler": "^1.1.4",
+    "graphql": "^15.5.0",
     "http-errors": "^1.8.0",
     "morgan": "^1.10.0",
     "reflect-metadata": "^0.1.13",
