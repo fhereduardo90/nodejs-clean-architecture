@@ -19,8 +19,11 @@ export class UserRespository implements IUserRepository {
       params.password,
       new Date(),
     )
+    user.uuid = uuidv4() // this field does not belong to user domain
     userDB.push(user)
 
+    // eslint-disable-next-line no-console
+    console.table(userDB)
     return Promise.resolve(user)
   }
 
