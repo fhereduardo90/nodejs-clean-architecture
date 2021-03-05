@@ -7,12 +7,13 @@ import {
   IFindUsersCase,
 } from '../../application/use-cases/users'
 import { CreateUserDto } from '../../application/use-cases/users/dtos'
+import { UserSerializer } from '../serializers/user.serializer'
 
 export async function findUsers(req: Request, res: Response): Promise<void> {
   const useCase = container.resolve<IFindUsersCase>(TYPES.FIND_USERS_CASE)
   const result = await useCase.execute()
 
-  res.status(200).json(result)
+  res.status(200).json(plainToClass(UserSerializer, result))
 }
 
 export async function createUser(req: Request, res: Response): Promise<void> {
@@ -21,5 +22,5 @@ export async function createUser(req: Request, res: Response): Promise<void> {
 
   const result = await useCase.execute(dto)
 
-  res.status(201).json(result)
+  res.status(201).json(plainToClass(UserSerializer, result))
 }
