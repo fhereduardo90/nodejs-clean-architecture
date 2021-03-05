@@ -1,3 +1,5 @@
+import { PrismaClient } from '@prisma/client'
+
 import {
   container,
   DependencyContainer,
@@ -6,7 +8,8 @@ import {
 
 // REPOSITORIES
 import { IUserRepository } from '../../application/contracts/repositories'
-import { UserRespository } from '../../infrastructure/persistance/memory/repositories'
+// import { UserRespository } from '../../infrastructure/persistance/memory/repositories'
+import { UserRespository } from '../../infrastructure/persistance/prisma/repositories/user.repository'
 
 import {
   CreateUserCase,
@@ -23,11 +26,25 @@ import {
 import { TYPES } from './types'
 
 export function IOCContainerInit(): DependencyContainer {
+  // PRISMA
+  container.register<PrismaClient>(TYPES.PRISMA_CONNECTION, {
+    useFactory: instanceCachingFactory<PrismaClient>(() => new PrismaClient()),
+  })
   // REPOSITORIES
-  container.registerSingleton<IUserRepository>(
-    TYPES.USER_REPOSITORY,
-    UserRespository,
-  )
+
+  // MEMORY
+  // container.registerSingleton<IUserRepository>(
+  //   TYPES.USER_REPOSITORY,
+  //   UserRespository,
+  // )
+
+  // PRISMA
+  container.register<IUserRepository>(TYPES.USER_REPOSITORY, {
+    useFactory: instanceCachingFactory<IUserRepository>(
+      (d) =>
+        new UserRespository(d.resolve<PrismaClient>(TYPES.PRISMA_CONNECTION)),
+    ),
+  })
 
   // USE CASES
   container.register<ICreateUserCase>(TYPES.CREATE_USER_CASE, {
