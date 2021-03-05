@@ -1,4 +1,4 @@
-import { Expose, Exclude, Transform, Type } from 'class-transformer'
+import { Expose, Exclude, Transform } from 'class-transformer'
 import { User } from '../../../../domain/user'
 
 @Exclude()
