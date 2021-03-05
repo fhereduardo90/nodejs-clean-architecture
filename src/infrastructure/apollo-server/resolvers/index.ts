@@ -1,5 +1,6 @@
 import { plainToClass } from 'class-transformer'
 import { DependencyContainer } from 'tsyringe'
+import { GraphQLScalarType } from 'graphql'
 import {
   ICreateUserCase,
   IFindUsersCase,
@@ -19,6 +20,12 @@ type ContextType = {
 }
 
 export const resolvers = {
+  DateTime: new GraphQLScalarType({
+    name: 'DateTime',
+    description: 'A date and time, represented as an ISO-8601 string',
+    serialize: (value) => value.toISOString(),
+    parseValue: (value) => new Date(value),
+  }),
   Query: {
     async users(
       _: unknown,

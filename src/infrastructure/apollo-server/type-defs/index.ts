@@ -1,12 +1,14 @@
 import { gql } from 'apollo-server-express'
 
 export const typeDefs = gql`
+  scalar DateTime
+
   type User {
     id: String!
     firstName: String
     lastName: String
     email: String
-    createdAt: String
+    createdAt: DateTime
   }
 
   input CreateUserInput {
